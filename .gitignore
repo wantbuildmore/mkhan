@@ -1,4 +1,5 @@
 *.py[cod]
+*local_settings.py
 
 # C extensions
 *.so
@@ -29,3 +30,6 @@ nosetests.xml
 # Translations
 *.mo
 
+# Virtualenv
+.env
+env

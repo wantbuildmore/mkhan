@@ -1,0 +1,1 @@
+https://github.com/django/django/archive/1.5c1.zip#egg=Django
