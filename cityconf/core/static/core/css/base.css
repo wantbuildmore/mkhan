@@ -1,0 +1,44 @@
+body {
+    background-color:#E5C893;
+    font-size:100%;
+}
+
+a:link {
+    color:#fff;
+    font-size:1.5em;
+}
+.top-bar {
+    color:#fff;
+    padding-left:1.5em;
+    padding-right:1.5em;
+    margin:0;
+    background-color:#E82C0C;
+}
+
+.top-bar h1 {
+    margin:0;
+    padding:0;
+    color:#fff;
+    font-size:1.3em;
+    display:inline;
+}
+
+.auth-area {
+    float:right;
+}
+
+
+footer {
+    padding-top:2em;
+    padding-bottom:4em;
+    background-color:#000;
+}
+
+.splash {
+    background-color:#FFFFC7;
+    padding:2em;
+}
+
+.splash h1, h3 {
+    margin:0;
+}

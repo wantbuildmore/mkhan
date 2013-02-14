@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load assets %}
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/favicons/apple-touch-icon-144x144-precomposed.png">
+    <!-- For iPhone with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/favicons/apple-touch-icon-114x114-precomposed.png">
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/favicons/apple-touch-icon-72x72-precomposed.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="images/favicons/apple-touch-icon-precomposed.png">
+
+    <title>CityConf: {% block title %}{% trans "Main" %}{% endblock title %}</title>
+
+    <!-- Included CSS Files -->
+    {% assets "core_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% block extra_css %}{% endblock extra_css %}
+
+    <!-- IE Fix for HTML5 Tags -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <div class="container top-bar home-border">
+        <h1>CityConf</h1>
+        <div class="auth-area">
+        {% if not user.is_authenticated %}
+            <span>Sign In with</span>
+            <a href="{% url 'socialauth_begin' 'google' %}?{{ redirect_querystring }}" class="tiny button">Google</a>
+            <a href="" class="tiny button">Twitter</a>
+            <a href="" class="tiny button">Facebook</a>
+        {% else %}
+            <span>Signed in as {{ user.email }}</span>
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="splash">
+        <h1>CityConf &mdash; Local conferences</h1>
+        <h3>Project will help you organize conference in your town</h3>
+    </div>
+
+    <article class="conferences">
+        <div class="conf">
+            <h1>Kiev</h1>
+            <h2><a href="/article/understandingwebdesign">KyivJS</a></h2>
+            <h3>22 Jan, 2013</h3>
+
+            <p>chairman Julia Savyuk</p>
+        </div>
+    </article>
+
+    <footer>
+    <div class="row">
+      <div class="four columns">
+        <p>&copy; 2013</p>
+      </div>
+      <div class="eight columns">
+        <ul class="inline-list right">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="about.php">Conferences</a></li>
+        </ul>
+      </div>
+    </div>
+    </footer>
+
+{% block core_js %}{% endblock %}
+</body>
+</html>

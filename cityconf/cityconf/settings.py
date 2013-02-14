@@ -1,23 +1,28 @@
 # Django settings for cityconf project.
 
-DEBUG = True
+import os
+
+DIR = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), ".."))
+PATH = lambda *a: os.path.join(DIR, *a)
+
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Max K.', 'imax@ukr.net'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': PATH('base.db'),
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -35,7 +40,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = PATH('webroot')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -47,7 +52,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 SECRET_KEY = 'qol+a-f**thwqi(-i=w3b5*ptcq2o(qc)(tte)w_#fm5!cs53x'
@@ -55,8 +59,10 @@ SECRET_KEY = 'qol+a-f**thwqi(-i=w3b5*ptcq2o(qc)(tte)w_#fm5!cs53x'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'social-auth-user'
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -64,17 +70,35 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'cityconf.urls'
-
-# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'cityconf.wsgi.application'
 
 TEMPLATE_DIRS = (
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+)
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# https://code.google.com/apis/console#access
+GOOGLE_OAUTH2_CLIENT_ID = 'xxx'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'yyy'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -83,10 +107,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+    'south',
+    'social_auth',
+    'django_countries',
+    'django_assets',
+    # local apps
+    'core',
+    'conference'
 )
 
 LOGGING = {
@@ -117,4 +145,3 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
