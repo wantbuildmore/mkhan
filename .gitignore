@@ -1,6 +1,7 @@
 *.py[cod]
 *local_settings.py
 cityconf/webroot/.webassets-cache/*
+cityconf/base.db
 
 # C extensions
 *.so

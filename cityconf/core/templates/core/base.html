@@ -52,20 +52,22 @@
         </div>
     </div>
 
-    <div class="splash">
-        <h1>CityConf &mdash; Local conferences</h1>
-        <h3>Project will help you organize conference in your town</h3>
-    </div>
-
-    <article class="conferences">
-        <div class="conf">
-            <h1>Kiev</h1>
-            <h2><a href="/article/understandingwebdesign">KyivJS</a></h2>
-            <h3>22 Jan, 2013</h3>
-
-            <p>chairman Julia Savyuk</p>
+    {% block content %}
+        <div class="splash">
+            <h1>CityConf &mdash; Local conferences</h1>
+            <h3>Project will help you organize conference in your town</h3>
         </div>
-    </article>
+
+        <article class="conferences">
+            <div class="conf">
+                <h1>Kiev</h1>
+                <h2><a href="/article/understandingwebdesign">KyivJS</a></h2>
+                <h3>22 Jan, 2013</h3>
+
+                <p>chairman Julia Savyuk</p>
+            </div>
+        </article>
+    {% endblock content %}
 
     <footer>
     <div class="row">
