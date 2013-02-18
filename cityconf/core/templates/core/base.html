@@ -38,16 +38,19 @@
 </head>
 <body>
 
-    <div class="container top-bar home-border">
-        <h1>CityConf</h1>
-        <div class="auth-area">
+    <div class="container row top-bar home-border">
+        <div class="eight columns">
+            <h1><a href="/">CityConf</a></h1>
+        </div>
+        <div class="four columns auth-area">
         {% if not user.is_authenticated %}
             <span>Sign In with</span>
             <a href="{% url 'socialauth_begin' 'google' %}?{{ redirect_querystring }}" class="tiny button">Google</a>
             <a href="" class="tiny button">Twitter</a>
             <a href="" class="tiny button">Facebook</a>
         {% else %}
-            <span>Signed in as {{ user.email }}</span>
+            <span>Signed in as
+                <a class="profile-link" href="{% url 'update_profile' %}">{{ user.email }}</a></span>
         {% endif %}
         </div>
     </div>

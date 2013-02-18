@@ -9,11 +9,11 @@ install:
 	env/bin/pip install -r requirements.txt
 
 run:
-	env/bin/python cityconf/manage.py runserver
+	$(MAKE) manage -e CMD=runserver
 
 manage:
 ifdef CMD
-	env/bin/python cityconf/manage.py $(CMD)
+	cd cityconf && ../env/bin/python manage.py $(CMD)
 else
 	@echo Usage: $(MAKE) manage -e CMD
 endif

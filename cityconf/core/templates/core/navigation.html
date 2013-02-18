@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<ul class="side-nav">
+  <li class="active"><a href="{% url 'update_profile' %}">{% trans "Profile" %}</a></li>
+  <li><a href="#">{% trans "Events" %}</a></li>
+  <li><a href="#">{% trans "Cities" %}</a></li>
+  <li class="divider"></li>
+  <li><a href="{% url 'suggest_city' %}">{% trans "Suggest a city" %}</a></li>
+</ul>

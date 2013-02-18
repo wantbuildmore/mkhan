@@ -17,12 +17,13 @@
   <div class="row">
     <div class="three columns navigation">{% include "core/navigation.html" %}</div>
     <div class="eight columns">
-      <h1>Profile</h1>
+      <h1>Suggest a city</h1>
       {% for message in messages %}
         <h5 class="no-marg-top subheader {{ message.tags }}">{{ message }}</h5>
       {% endfor %}
+
       <div class="panel">
-        <form method="post" action="{% url "update_profile" %}">
+        <form method="post" action="{% url "suggest_city" %}">
             {% csrf_token %}
 
               {% for field in form %}

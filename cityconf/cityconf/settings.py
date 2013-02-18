@@ -74,12 +74,13 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'cityconf.urls'
 WSGI_APPLICATION = 'cityconf.wsgi.application'
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
     'social_auth.context_processors.social_auth_by_name_backends',
     'social_auth.context_processors.social_auth_backends',
     'social_auth.context_processors.social_auth_by_type_backends',
@@ -95,6 +96,8 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.linkedin.LinkedinBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGIN_REDIRECT_URL = '/profile/'
 
 # https://code.google.com/apis/console#access
 GOOGLE_OAUTH2_CLIENT_ID = 'xxx'
