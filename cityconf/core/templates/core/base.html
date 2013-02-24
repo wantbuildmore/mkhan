@@ -39,8 +39,22 @@
 <body>
 
     <div class="container row top-bar home-border">
-        <div class="eight columns">
+        <div class="eight columns navigation-area">
             <h1><a href="/">CityConf</a></h1>
+            {% comment %}
+            <ul class="menu">
+                <li>
+                    <a href="">People</a>
+                </li>
+                <li>
+                    <a href="">Events</a>
+                </li>
+                <li>
+                    <a href="">Places</a>
+                </li>
+            </ul>
+            {% endcomment %}
+            <div class="clean"></div>
         </div>
         <div class="four columns auth-area">
         {% if not user.is_authenticated %}
@@ -57,18 +71,20 @@
 
     {% block content %}
         <div class="splash">
-            <h1>CityConf &mdash; Local conferences</h1>
-            <h3>Project will help you organize conference in your town</h3>
+            <h1>{% trans "Local conferences" %}</h1>
+            <h3>{% trans "Project to help you organize conference in your town" %}</h3>
         </div>
 
         <article class="conferences">
+            {% for conf in last_conferences %}
             <div class="conf">
-                <h1>Kiev</h1>
-                <h2><a href="/article/understandingwebdesign">KyivJS</a></h2>
-                <h3>22 Jan, 2013</h3>
+                <h3 class="date">{{ conf.date|date:"M j, Y" }}</h3>
+                <h1><a href="{{ conf.get_absolute_url }}">{{ conf.title }}</a></h1>
+                <h2 class="location">{{ conf.location.name }}, {{ conf.location.country.name }}</h2>
 
-                <p>chairman Julia Savyuk</p>
+                <p>Chairman <strong>{{ conf.chairman.name }}</strong></p>
             </div>
+            {% endfor %}
         </article>
     {% endblock content %}
 

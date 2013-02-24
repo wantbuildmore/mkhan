@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="profile cities">
+  <div class="row">
+    <div class="three columns navigation">&nbsp;</div>
+    <div class="eight columns">
+      <h1 class="subheader">{% trans "Delete item" %}</h1>
+      {% include "core/sys/messages.html" %}
+
+      <div class="panel">
+        <p>
+          {% trans "Are you sure you want delete" %} &laquo;{{ object }}&raquo;?
+        </p>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input class="button alert" type="submit" value="{% trans "Yes" %}"/>
+          <input class="button" type="button" onclick="javascript:history.back(-1);" value="{% trans "No" %}"/>
+        </form>
+
+      </div>
+    </div>
+    <div class="one columns">&nbsp;</div>
+
+  </div>
+</div>
+{% endblock content %}

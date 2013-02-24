@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="profile cities">
+  <div class="row">
+    <div class="three columns navigation">{% include "core/navigation.html" with active="cities" %}</div>
+    <div class="eight columns">
+      <h1 class="subheader">{% trans "Suggested cities" %}</h1>
+      {% include "core/sys/messages.html" %}
+      {% if object_list %}
+      <table class="list city-list">
+        <tr>
+          <th class="a-left">{% trans "Name" %}</th>
+
+          <th class="a-left">{% trans "Name (EN)" %}</th>
+          <th class="a-center">{% trans "Country" %}</th>
+          <th class="a-center">{% trans "Verified" %}</th>
+          <th class="a-center">{% trans "Actions" %}</th>
+        </tr>
+        {% for city in object_list %}
+        <tr>
+          <td class="col-name">{{ city.name }}</td>
+          <td class="col-name-en">{{ city.name_en }}</td>
+          <td class="col-country a-center">{{ city.country }}</td>
+          <td class="col-verified a-center">
+            {% if city.is_verified %}{% trans "Yes" %}{% else %}
+            {% trans "No" %}{% endif %}
+          </td>
+          <td class="col-actions a-center">
+            {% if not city.is_verified %}
+              <a href="{% url 'delete_city' city.pk %}" class="small alert button">{% trans "Remove" %}</a>
+            {% else %}
+              <a href="#" class="small secondary button disabled">{% trans "Remove" %}</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <div class="panel">
+        <p>{% trans "No cities suggested yet" %}</p>
+      </div>
+      {% endif %}
+
+    </div>
+    <div class="one columns">&nbsp;</div>
+
+  </div>
+</div>
+{% endblock content %}

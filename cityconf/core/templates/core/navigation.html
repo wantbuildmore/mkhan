@@ -1,9 +1,13 @@
 {% load i18n %}
 
 <ul class="side-nav">
-  <li class="active"><a href="{% url 'update_profile' %}">{% trans "Profile" %}</a></li>
-  <li><a href="#">{% trans "Events" %}</a></li>
-  <li><a href="#">{% trans "Cities" %}</a></li>
+  <li {% if active == "profile" %}class="active"{% endif %}>
+    <a href="{% url 'update_profile' %}">{% trans "Profile" %}</a></li>
+  <li {% if active == "conferences" %}class="active"{% endif %}>
+    <a href="{% url 'conferences' %}">{% trans "Conferences" %}</a></li>
+  <li {% if active == "cities" %}class="active"{% endif %}>
+    <a href="{% url 'cities' %}">{% trans "Cities" %}</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'suggest_city' %}">{% trans "Suggest a city" %}</a></li>
+  <li {% if active == "suggest_city" %}class="active"{% endif %}>
+    <a href="{% url 'suggest_city' %}">{% trans "Suggest a city" %}</a></li>
 </ul>

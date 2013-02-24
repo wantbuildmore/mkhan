@@ -26,3 +26,5 @@ else
 	@echo Usage: $(MAKE) migrate -e APP="app"
 endif
 
+dump:
+	$(MAKE) manage -e CMD="dumpdata --indent=4 sites auth core > core/fixtures/initial_data.json"

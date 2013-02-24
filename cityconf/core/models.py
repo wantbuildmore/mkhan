@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 
 from composite_field import CompositeField
 from django_countries import CountryField
 
-from .manager import CitiesManager
+from .manager import CitiesManager, ConferencesManager
 
 __all__ = ("City", "Person", "Conference")
 
@@ -25,6 +26,7 @@ class City(models.Model):
     name_en = models.CharField(_("City Name in English"), max_length=128)
     location = CoordField()
     is_verified = models.BooleanField(default=False)
+    suggested_by = models.ForeignKey(User, null=True)
 
     objects = CitiesManager()
 
@@ -33,7 +35,7 @@ class City(models.Model):
         verbose_name_plural = _("Cities")
 
     def __unicode__(self):
-        return "{}".format(self.name_en)
+        return u"{}".format(self.name_en)
 
 
 class Person(models.Model):
@@ -44,7 +46,9 @@ class Person(models.Model):
         _("Name in english"), blank=True, max_length=128)
 
     email = models.EmailField(_("Email"), max_length=255)
-    loc = models.ForeignKey(City, null=True, blank=True)
+    loc = models.ForeignKey(
+        City, null=True, blank=True,
+        limit_choices_to={"is_verified": True})
 
     company = models.CharField(
         _("Company"), blank=True, max_length=128, default="")
@@ -56,9 +60,7 @@ class Person(models.Model):
         verbose_name_plural = _("Persons")
 
     def get_absolut_url(self):
-        # TODO: use `url_for` for such kind of methods
-        # return reverse('author-detail', kwargs={'pk': self.pk})
-        return ''
+        return reverse("update_profile")
 
     def __unicode__(self):
         return "Person: {}".format(self.name_en)
@@ -68,7 +70,10 @@ class Conference(models.Model):
     title = models.CharField(_("Title"), max_length=128)
     title_en = models.CharField(_("Title in english"), max_length=128)
 
-    location = models.ForeignKey(City)
+    location = models.ForeignKey(
+        City, null=True, blank=True,
+        limit_choices_to={"is_verified": True})
+
     chairman = models.ForeignKey(Person)
     team = models.ManyToManyField(
         Person, null=True, blank=True,
@@ -76,6 +81,10 @@ class Conference(models.Model):
 
     date = models.DateField(_("When"))
     is_verified = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, null=True)
+    is_visible = models.BooleanField(default=False)
+
+    objects = ConferencesManager()
 
     class Meta:
         verbose_name = _("Conference")

@@ -1,9 +1,9 @@
 from django import forms
 
-from .models import Person, City
+from .models import Person, City, Conference
 
 
-__all__ = ("PersonForm", "CityForm")
+__all__ = ("PersonForm", "CityForm", "ConferenceForm")
 
 
 class PersonForm(forms.ModelForm):
@@ -19,3 +19,11 @@ class CityForm(forms.ModelForm):
         model = City
         fields = (
             "country", "name", "name_en")
+
+
+class ConferenceForm(forms.ModelForm):
+    class Meta:
+        model = Conference
+        fields = (
+            "title", "title_en",
+            "location", "date")

@@ -422,25 +422,60 @@
     }
 },
 {
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "MaksymKlymyshyn", 
+        "first_name": "Maksym", 
+        "last_name": "Klymyshyn", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-02-24T15:26:18.528Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "!", 
+        "email": "klymyshyn@gmail.com", 
+        "date_joined": "2013-02-18T17:48:56.481Z"
+    }
+},
+{
     "pk": 1, 
     "model": "core.city", 
     "fields": {
+        "name": "Kyiv", 
         "country": "UA", 
+        "location_lat": 50.457231, 
         "name_en": "Kyiv", 
         "location_lon": 30.609798, 
-        "name": "Kyiv", 
-        "location_lat": 50.457231
+        "is_verified": true, 
+        "suggested_by": 1
     }
 },
 {
     "pk": 2, 
     "model": "core.city", 
     "fields": {
+        "name": "Lviv.js", 
         "country": "UA", 
+        "location_lat": 49.839754, 
         "name_en": "Lviv", 
         "location_lon": 24.0271, 
-        "name": "Lviv.js", 
-        "location_lat": 49.839754
+        "is_verified": true, 
+        "suggested_by": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "core.city", 
+    "fields": {
+        "name": "Odessa", 
+        "country": "UA", 
+        "location_lat": 0.0, 
+        "name_en": "Odessa", 
+        "location_lon": 0.0, 
+        "is_verified": false, 
+        "suggested_by": 3
     }
 },
 {
@@ -448,10 +483,12 @@
     "model": "core.person", 
     "fields": {
         "loc": 1, 
-        "email": "imax@ukr.net", 
-        "name_en": "Max K.", 
+        "name": "Max K.", 
+        "company": "", 
         "user": 1, 
-        "name": "Max K."
+        "position": "", 
+        "name_en": "Max K.", 
+        "email": "imax@ukr.net"
     }
 },
 {
@@ -459,21 +496,39 @@
     "model": "core.person", 
     "fields": {
         "loc": 2, 
-        "email": "julia@cityconf.org.ua", 
-        "name_en": "Julia S.", 
+        "name": "Julia S.", 
+        "company": "", 
         "user": 2, 
-        "name": "Julia S."
+        "position": "", 
+        "name_en": "Julia S.", 
+        "email": "julia@cityconf.org.ua"
+    }
+},
+{
+    "pk": 3, 
+    "model": "core.person", 
+    "fields": {
+        "loc": 1, 
+        "name": "Max", 
+        "company": "", 
+        "user": 3, 
+        "position": "", 
+        "name_en": "", 
+        "email": "imax@ukr.net"
     }
 },
 {
     "pk": 1, 
     "model": "core.conference", 
     "fields": {
+        "is_visible": true, 
         "title": "Kyiv.js", 
         "title_en": "Kyiv.js", 
+        "owner": 3, 
         "chairman": 1, 
         "team": [], 
         "date": "2013-02-13", 
+        "is_verified": true, 
         "location": 1
     }
 },
@@ -481,13 +536,16 @@
     "pk": 2, 
     "model": "core.conference", 
     "fields": {
+        "is_visible": true, 
         "title": "Lviv.js", 
         "title_en": "Lviv.js", 
+        "owner": 2, 
         "chairman": 2, 
         "team": [
-            1
+            3
         ], 
         "date": "2013-02-13", 
+        "is_verified": true, 
         "location": 2
     }
 }

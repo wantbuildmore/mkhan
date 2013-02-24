@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="profile conferences">
+  <div class="row">
+    <div class="three columns navigation">
+      {% include "core/navigation.html" with active="conferences" %}</div>
+    <div class="eight columns">
+      <h1 class="subheader">{% trans "Conferences" %}</h1>
+      <a href="{% url 'create_conference' %}" class="button small success">{% trans "Add new one" %}</a>
+      <hr />
+      {% include "core/sys/messages.html" %}
+
+      {% if object_list %}
+      <table class="list conference-list">
+        <tr>
+          <th class="a-left">{% trans "Title" %}</th>
+
+          <th class="a-center">{% trans "Location" %}</th>
+          <th class="a-center">{% trans "Verified" %}</th>
+          <th class="a-center">{% trans "Visible" %}</th>
+          <th class="a-center">{% trans "Actions" %}</th>
+        </tr>
+        {% for conf in object_list %}
+        <tr>
+          <td class="col-name">{{ conf.title }}</td>
+          <td class="col-location a-center">{{ conf.location.name }}, {{ conf.location.country.name }}</td>
+          <td class="col-verified a-center">
+            {% if conf.is_verified %}{% trans "Yes" %}{% else %}
+            {% trans "No" %}{% endif %}
+          </td>
+          <td class="col-visible a-center">
+            {% if conf.is_visible %}{% trans "Yes" %}{% else %}
+            {% trans "No" %}{% endif %}
+          </td>
+          <td class="col-actions a-center">
+            <a href="{% url 'delete_conference' conf.pk %}" class="small alert button">{% trans "Remove" %}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <div class="panel">
+        <p>{% trans "No conferences added yet" %}</p>
+      </div>
+      {% endif %}
+
+    </div>
+    <div class="one columns">&nbsp;</div>
+
+  </div>
+</div>
+{% endblock content %}

@@ -5,25 +5,13 @@
 {% block content %}
 <div class="profile">
   <div class="row">
-    <div class="three columns">
-      &nbsp;
-    </div>
-
+    <div class="three columns navigation">{% include "core/navigation.html" with active="conferences" %}</div>
     <div class="eight columns">
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="three columns navigation">{% include "core/navigation.html" %}</div>
-    <div class="eight columns">
-      <h1>Suggest a city</h1>
-      {% for message in messages %}
-        <h5 class="no-marg-top subheader {{ message.tags }}">{{ message }}</h5>
-      {% endfor %}
+      <h1 class="subheader">{% trans "Conferences" %}</h1>
+      {% include "core/sys/messages.html" %}
 
       <div class="panel">
-        <form method="post" action="{% url "suggest_city" %}">
+        <form method="post" action="{% url "create_conference" %}">
             {% csrf_token %}
 
               {% for field in form %}
@@ -41,7 +29,7 @@
               <div class="row">
                 <div class="four monile-one columns">&nbsp;</div>
                 <div class="eight mobile-three columns">
-                  <button class="success button">{% trans "Save" %}</button>
+                  <button class="success button">{% trans "Create" %}</button>
                 </div>
               </div>
         </form>
