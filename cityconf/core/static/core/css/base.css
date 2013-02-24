@@ -221,3 +221,42 @@ ul.menu {
 .top-bar ul.menu li a {
     font-size:15pt;
 }
+
+
+ul.team {
+    margin-left:30pt;
+}
+
+ul.team li {
+    list-style:square;
+    margin-bottom:10pt;
+}
+ul.team li .member-name {
+    font-size:15pt;
+    font-weight:black;
+    display:inline-block;
+    margin-right:10pt;
+}
+
+ul.team li .member-name-en {
+    font-size:15pt;
+}
+ul.team li .member-details {
+    display:inline-block;
+    margin-left
+}
+
+.team-column {
+    padding-top:90pt;
+}
+
+.conf-profile dl dt,
+.conf-profile dl dd {
+    display:inline-block;
+    font-size:16pt;
+}
+
+.conf-profile dl dt {
+    font-weight:bold;
+    padding-right:5pt;
+}

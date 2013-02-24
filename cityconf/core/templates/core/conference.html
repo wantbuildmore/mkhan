@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="profile">
+  <div class="row">
+    <div class="eight columns">
+      <h1 class="subheader">{{ object.title }}</h1>
+      <h4 class="subheader">{{ object.title_en }}</h4>
+
+      {% include "core/sys/messages.html" %}
+
+      <div class="panel conf-profile">
+        <dl>
+          <dt>{% trans "Location" %}:</dt>
+          <dd>{{ object.location.name }}, {{ object.location.country.name }}</dd>
+        </dl>
+        <dl>
+          <dt>{% trans "Chairman" %}:</dt>
+          <dd>
+            <strong>{{ object.chairman.name }}</strong>
+            <span class="name-en">({{ object.chairman.name_en }})</span></small>
+          </dd>
+        </dl>
+        <strong>{% trans "Date" %}:</strong>
+        <h3 class="subheader">{{ object.date|date:"M j, Y" }}</h3>
+      </div>
+
+    </div>
+    <div class="four columns team-column">
+      {% if object.team.all %}
+        <h4 class="subheader">{% trans "Team" %}</h4>
+        <ul class="team">
+          {% for member in object.team.all %}
+          <li>
+            <strong class="member-name">{{ member.name }}</strong>
+            <span class="member-name-en">({{ member.name_en }})</span>
+            <br />
+            <span class="member-details">{{ member.position }} at {{ member.company }}</span>
+          </li>
+          {% endfor %}
+
+        </ul>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

@@ -12,26 +12,26 @@
 
       <div class="panel">
         <form method="post" action="{% url "create_conference" %}">
-            {% csrf_token %}
+          {% csrf_token %}
 
-              {% for field in form %}
-                <div class="row">
-                  <div class="four mobile-one columns">
-                    <label class="right inline">{{ field.label }}:</label>
-                  </div>
-                  <div class="eight mobile-three columns {% if field.errors %}error{% endif %}">
-                    {{ field }}
-                    <small>{{ field.errors|join:"; " }}</small>
-                  </div>
-                </div>
-              {% endfor %}
-              <hr>
-              <div class="row">
-                <div class="four monile-one columns">&nbsp;</div>
-                <div class="eight mobile-three columns">
-                  <button class="success button">{% trans "Create" %}</button>
-                </div>
+          {% for field in form %}
+            <div class="row">
+              <div class="four mobile-one columns">
+                <label class="right inline">{{ field.label }}:</label>
               </div>
+              <div class="eight mobile-three columns {% if field.errors %}error{% endif %}">
+                {{ field }}
+                <small>{{ field.errors|join:"; " }}</small>
+              </div>
+            </div>
+          {% endfor %}
+          <hr>
+          <div class="row">
+            <div class="four monile-one columns">&nbsp;</div>
+            <div class="eight mobile-three columns">
+              <button class="success button">{% trans "Create" %}</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'django_assets',
     # local apps
     'core',
-    'conference'
 )
 
 LOGGING = {

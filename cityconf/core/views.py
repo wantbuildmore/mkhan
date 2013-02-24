@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.views.generic import UpdateView, CreateView, ListView, DeleteView
+from django.views.generic import UpdateView, CreateView, ListView, \
+    DeleteView, DetailView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,7 +10,8 @@ from .forms import PersonForm, CityForm, ConferenceForm
 
 __all__ = ("PersonProfileView", "SuggestCityView",
            "CreateConferenceView", "ConferencesListView",
-           "CitiesListView", "DeleteConferenceView")
+           "CitiesListView", "DeleteConferenceView",
+           "ConferenceView")
 
 
 class PersonProfileView(UpdateView):
@@ -77,6 +79,12 @@ class DeleteCityView(DeleteView):
             raise HttpResponseForbidden
 
         return obj
+
+
+class ConferenceView(DetailView):
+    model = Conference
+    template_name = "core/conference.html"
+    queryset = Conference.objects.active()
 
 
 class CreateConferenceView(CreateView):

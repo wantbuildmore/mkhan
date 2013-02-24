@@ -3,11 +3,19 @@ from django.contrib.auth.decorators import login_required
 
 from .views import PersonProfileView, SuggestCityView, CreateConferenceView, \
     ConferencesListView, CitiesListView, DeleteCityView, \
-    DeleteConferenceView
+    DeleteConferenceView, ConferenceView
 
 
 urlpatterns = patterns(
     '',
+    # hanle conference-by-PK
+    url(r'^conference/(?P<pk>[\d]+)/$',
+        ConferenceView.as_view(),
+        name="conference_pk"),
+    # handle conference-by-slug
+    url(r'^conference/(?P<slug>[A-Za-z0-9\-]+)/$',
+        ConferenceView.as_view(),
+        name="conference_slug"),
     url(r'^profile/$',
         login_required(PersonProfileView.as_view()),
         name="update_profile"),

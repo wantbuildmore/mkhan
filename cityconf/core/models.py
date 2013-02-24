@@ -83,12 +83,18 @@ class Conference(models.Model):
     is_verified = models.BooleanField(default=False)
     owner = models.ForeignKey(User, null=True)
     is_visible = models.BooleanField(default=False)
-
+    slug = models.SlugField(max_length=255, blank=True, null=True)
     objects = ConferencesManager()
 
     class Meta:
         verbose_name = _("Conference")
         verbose_name_plural = _("Conferences")
+
+    def get_absolute_url(self):
+        if self.slug:
+            return reverse("conference_slug", args=[self.slug])
+
+        return reverse("conference_pk", args=[self.pk])
 
     def __unicode__(self):
         return "Conference: {}".format(self.title_en)
