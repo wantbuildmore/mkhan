@@ -10,8 +10,8 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', TemplateView.as_view(template_name="core/base.html")),
-    url(r'', include('core.urls')),
     url(r'', include('social_auth.urls')),
+    url(r'', include('core.urls')),
     url(r'^admin/', include(admin.site.urls))
 )
 

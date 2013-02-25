@@ -4,4 +4,3 @@ django-composite-field==0.1
 django-countries==1.5
 django-social-auth==0.7.20
 -e git+git://github.com/miracle2k/webassets.git@bfcd816fb9713de782#egg=webassets
-https://github.com/django/django/archive/1.5c1.zip

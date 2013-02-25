@@ -6,6 +6,8 @@ SHELL=/bin/bash
 
 install:
 	virtualenv env
+	@echo Installing Django 1.5c1 manually
+	env/bin/pip install https://github.com/django/django/archive/1.5c1.zip	
 	env/bin/pip install -r requirements.txt
 
 run:
